@@ -2,3 +2,25 @@ tree
 libreoffice
 gnome-screensaver
 ffmpeg
+
+Jak schowac gruba?
+
+Yes. Edit /etc/default/grub (using gksu gedit /etc/default/grub), and remove the "quiet splash" from the Linux command line:
+
+Here's what it looks like by default:
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+
+Make it look like this:
+
+GRUB_CMDLINE_LINUX_DEFAULT=""
+
+After this run sudo update-grub2
+
+=====================
+Dodanie do autostartu
+=====================
+    Create a file for your startup script and write your script in the file: $ sudo nano /etc/init.d/superscript.
+    Save and exit: Ctrl + X , Y , Enter.
+    Make the script executable: $ sudo chmod 755 /etc/init.d/superscript.
+    Register script to be run at startup: $ sudo update-rc.d superscript defaults.
