@@ -26,7 +26,7 @@ do
 EOF
     read -n1 -s
     case "$REPLY" in
-    "0")  echo "Podaj nazwe programu wraz z parametrami uruchomienia go:";
+    "0")  echo "Podaj nazwe programu wraz z parametrami uruchomienia go np. ls -l:";
           sed -i 's/^[0-9]/0/' flags/switchrun.flag;
 	  sed -i '$ d' flags/cases/0.case;
 	  read appname; echo "$appname" >> flags/cases/0.case;
@@ -58,8 +58,9 @@ else
     case "$switchcase" in
     "0") $(sed -n 2p flags/cases/0.case);;
     "1") libreoffice --impress --show $(sed -n 2p flags/cases/1.case);;
-    "2") ;;
-    "3") gnome-screensaver-command -l;;
+    "2") ffplay "$(sed -n 2p flags/cases/2.case)" -fs;;
+    "3") gnome-screensaver-command -l; 
+         ffplay "$(sed -n 2p flags/cases/3.case)";;
 fi
 
 

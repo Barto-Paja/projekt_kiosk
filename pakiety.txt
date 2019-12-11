@@ -1,0 +1,4 @@
+tree
+libreoffice
+gnome-screensaver
+ffmpeg
