@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=gnome-terminal --full-screen -x bash '//home/ubuntu/git/projekt_kiosk/projekt.sh'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Projekt-Kiosk
+Name=Terminal
+Comment[en_US]=Skrypt uruchamiajacy wybrany wariant. Imitacja kiosku.
+Comment=Skrypt uruchamiajacy wybrany wariant. Imitacja kiosku.
