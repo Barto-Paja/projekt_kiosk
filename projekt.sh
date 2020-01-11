@@ -32,8 +32,9 @@ then
   fi
   exit 0
 else
-  echo "Invalid argument";
-  exit 1;
+  #do nothing - do start process
+  #exit 1;
+  echo ""
 fi
 
 showmenu=$(more flags/showmenu.flag | grep -m1 '^[0-9]')
@@ -78,7 +79,7 @@ EOF
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
       "3" ) echo "Podaj sciezke do muzyki";
-      sed -i 's/^[0-9]/3/'flags/switchrun.flag;
+      sed -i 's/^[0-9]/3/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/3.case;
       read filename; echo "$filename" >> flags/cases/3.case;
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
@@ -96,7 +97,8 @@ else
   case "$switchcase" in
     "0" ) $(sed -n 2p flags/cases/0.case);;
     "1" ) libreoffice --impress --show $(sed -n 2p flags/cases/1.case);;
+    "2" ) ffplay -fs "$(sed -n 2p flags/cases/2.case)";;
     "3" ) gnome-screensaver-command -l;
-     ffplay "$(sed -n 2p flags/cases3.case)";;
+     ffplay "$(sed -n 2p flags/cases/3.case)";;
   esac
 fi

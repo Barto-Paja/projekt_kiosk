@@ -16,3 +16,46 @@ Skrypt powinien być możliwie intuicyjny i zawierać informację pomocnicze dla
 Zachęcam do rozbudowania skryptu o własne pomysły.
 
 Działanie i omówienie skryptu można zaprezentować na własnym komputerze i na skonfigurowanym przygotowanym dowolnym systemie linux.
+
+
+PROJEKT KIOSK 
+
+Instalacja
+
+uruchomienie skryptu projekt.sh --install z uprawnieniami administratora
+
+Uwagi:
+w razie problemow zwiazanych z automatycznym dodaniem skryptu do autostartu nalezy wejsc
+w "Startup Applications Preferneces" i dodac tam nastepujacy wpis:
+- nazwa: tutaj dowolna
+- polecenie: gnome-terminal --full-screen -- /bin/bash -c "/home/ubuntu/git/projekt_kiosk/projekt.sh; exec /bin/bash"
+gdzie: /bin/bash to sciezka do uruchomienia Twojego shella
+gdzie: "/home/.." to sciezka gdzie znajduje sie plik projekt.sh
+katalog flags musi sie znajdowac w home/nazwa_uzytkownika/
+
+Menu:
+    (0) Uruchomienie wybranego program
+    (1) Uruchomienie wybranej prezentacji
+    (2) Uruchomienie wybranego filmu
+    (3) Uruchomienie wybranego wygaszacza ekranu i muzyki w tle
+    (Q)uit
+
+Menu jest case-sensitive! 
+(0) = nalezy podac pelne polecenie, jakie nas interesuje przy uruchomieniu programu
+(1) = nalezy podac pelna sciezke do pliku prezentacji
+uwaga: wymagane libreoffie
+(2) = nalezy podac pelna sciezke do pliku filmu 
+uwaga: wymagane ffmpeg
+(3) = nalezy podac pelna sciezke do pliku muzyki
+uwaga: wymagane ffplay
+
+Dodatkowe pakiety wymagane do pelnego dzialania
+tree
+libreoffice
+gnome-screensaver
+ffmpeg
+
+Inne pozostale problemy:
+Jezeli wystepuje problem z uruchomieniem nalezy sprawdzic, czy wszystkie sciezki sa 
+wedlug instukcji, czy plik projekt.sh ma uprawnienia do uruchomienia jako program.
+

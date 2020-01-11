@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=gnome-terminal --full-screen -x bash '//home/ubuntu/git/projekt_kiosk/projekt.sh'
+Exec=gnome-terminal --full-screen -- /bin/bash -c "/home/ubuntu/git/projekt_kiosk/projekt.sh; exec /bin/bash"
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
