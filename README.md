@@ -25,13 +25,13 @@ Zachęcam do rozbudowania skryptu o własne pomysły.
 Działanie i omówienie skryptu można zaprezentować na własnym komputerze i na skonfigurowanym przygotowanym dowolnym systemie linux.
 
 
-#PROJEKT KIOSK 
+# PROJEKT KIOSK 
 
-##Instalacja
+## Instalacja
 
 uruchomienie skryptu projekt.sh --install z uprawnieniami administratora
 
-##Uwagi:
+## Uwagi:
 w razie problemow zwiazanych z automatycznym dodaniem skryptu do autostartu nalezy wejsc
 w "Startup Applications Preferneces" i dodac tam nastepujacy wpis:
 - nazwa: tutaj dowolna
@@ -41,13 +41,13 @@ gdzie: "/home/.." to sciezka gdzie znajduje sie plik projekt.sh
 katalog flags musi sie znajdowac w home/nazwa_uzytkownika/
 
 
-##Dodatkowe pakiety wymagane do pelnego dzialania
+## Dodatkowe pakiety wymagane do pelnego dzialania
 - tree
 - libreoffice
 - gnome-screensaver
 - ffmpeg
 
-##Inne pozostale problemy:
+## Inne pozostale problemy:
 Jezeli wystepuje problem z uruchomieniem nalezy sprawdzic, czy wszystkie sciezki sa 
 wedlug instukcji, czy plik projekt.sh ma uprawnienia do uruchomienia jako program.
 
