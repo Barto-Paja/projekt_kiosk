@@ -30,6 +30,13 @@ then
     echo "CP error: $?";
     exit 2;
   fi
+  echo "Create media storage";
+  mkdir $HOME/media
+  if [ $? -ne 0 ]
+  then
+    echo "CP error: $?";
+    exit 2;
+  fi
   exit 0
 else
   #do nothing - do start process
@@ -50,7 +57,7 @@ then
     ------------------------------
     Please enter your choice:
 
-    (0) Uruchomienie wybranego program
+    (0) Uruchomienie wybranego programu
     (1) Uruchomienie wybranej prezentacji
     (2) Uruchomienie wybranego filmu
     (3) Uruchomienie wybranego wygaszacza ekranu i muzyki w tle
@@ -59,15 +66,18 @@ then
 EOF
     read -n1 -s
     case "$REPLY" in
-      "0" ) echo "Podaj nazwe programu wraz z parametrami uruchomienia go";
-      echo "Np.: ls -l";
+      "0" ) echo "Wybierz program, ktory ma zostac uruchomiony.";
+      echo "1) Mozilla Firefox";
+      echo "2) Thunderbird (klient pocztowy)";
+      echo "3) Kalendarz";
+      echo "*) Wpisanie roznego od 1-3 spowoduje uruchomienie kalendarza";
       sed -i 's/^[0-9]/0/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/0.case;
       read appname; echo "$appname" >> flags/cases/0.case;
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
       "1" ) echo "Lista plikow:";
-      ls -l;
+      ls media -l;
       echo "Podaj nazwe pliku z prezentacja, ktora chcesz uruchomic";
       sed -i 's/^[0-9]/1/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/1.case;
@@ -75,7 +85,7 @@ EOF
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
       "2" ) echo "Lista plikow:";
-      ls -l;
+      ls media -l;
       echo "Podaj nazwe pliku filmu";
       sed -i 's/^[0-9]/2/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/2.case;
@@ -83,7 +93,7 @@ EOF
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
       "3" ) echo "Lista plikow:";
-      ls -l;
+      ls media -l;
       echo "Podaj nazwe pliku z muzyka";
       sed -i 's/^[0-9]/3/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/3.case;
@@ -101,14 +111,18 @@ EOF
   done
 else
   case "$switchcase" in
-    "0" ) $(sed -n 2p flags/cases/0.case);
-    sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
-    "1" ) libreoffice --impress --show "/home/ubuntu/media/$(sed -n 2p flags/cases/1.case)";
-    sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
-    "2" ) ffplay -fs "/home/ubuntu/media/$(sed -n 2p flags/cases/2.case)";
-    sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
-    "3" ) gnome-screensaver-command -l;
-     ffplay "/home/ubuntu/media/$(sed -n 2p flags/cases/3.case)";
-     sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
+    "0" ) sed -i 's/^[0-9]/1/' flags/showmenu.flag;
+    case "$(sed -n 2p flags/cases/0.case)" in
+      "1" ) firefox;;
+      "2" ) thunderbird;;
+      * ) gnome-calendar;;
+    esac;;
+    "1" ) sed -i 's/^[0-9]/1/' flags/showmenu.flag;
+    libreoffice --impress --show "/home/ubuntu/media/$(sed -n 2p flags/cases/1.case)";;
+    "2" ) sed -i 's/^[0-9]/1/' flags/showmenu.flag;
+    ffplay -fs "/home/ubuntu/media/$(sed -n 2p flags/cases/2.case)";;
+    "3" ) sed -i 's/^[0-9]/1/' flags/showmenu.flag;
+    gnome-screensaver-command -l;
+    ffplay "/home/ubuntu/media/$(sed -n 2p flags/cases/3.case)";;
   esac
 fi
