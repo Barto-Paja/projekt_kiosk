@@ -66,19 +66,25 @@ EOF
       read appname; echo "$appname" >> flags/cases/0.case;
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
-      "1" ) echo "Podaj sciezke do pliku prezentacji";
+      "1" ) echo "Lista plikow:";
+      ls -l;
+      echo "Podaj nazwe pliku z prezentacja, ktora chcesz uruchomic";
       sed -i 's/^[0-9]/1/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/1.case;
       read filename; echo "$filename" >> flags/cases/1.case;
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
-      "2" ) echo "Podaj sciezke do filmu";
+      "2" ) echo "Lista plikow:";
+      ls -l;
+      echo "Podaj nazwe pliku filmu";
       sed -i 's/^[0-9]/2/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/2.case;
       read filename; echo "$filename" >> flags/cases/2.case;
       sed -i 's/^[0-9]/0/' flags/showmenu.flag;
       shutdown -r now;;
-      "3" ) echo "Podaj sciezke do muzyki";
+      "3" ) echo "Lista plikow:";
+      ls -l;
+      echo "Podaj nazwe pliku z muzyka";
       sed -i 's/^[0-9]/3/' flags/switchrun.flag;
       sed -i '$ d' flags/cases/3.case;
       read filename; echo "$filename" >> flags/cases/3.case;
@@ -95,10 +101,14 @@ EOF
   done
 else
   case "$switchcase" in
-    "0" ) $(sed -n 2p flags/cases/0.case);;
-    "1" ) libreoffice --impress --show $(sed -n 2p flags/cases/1.case);;
-    "2" ) ffplay -fs "$(sed -n 2p flags/cases/2.case)";;
+    "0" ) $(sed -n 2p flags/cases/0.case);
+    sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
+    "1" ) libreoffice --impress --show "/home/ubuntu/media/$(sed -n 2p flags/cases/1.case)";
+    sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
+    "2" ) ffplay -fs "/home/ubuntu/media/$(sed -n 2p flags/cases/2.case)";
+    sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
     "3" ) gnome-screensaver-command -l;
-     ffplay "$(sed -n 2p flags/cases/3.case)";;
+     ffplay "/home/ubuntu/media/$(sed -n 2p flags/cases/3.case)";
+     sed -i 's/^[0-9]/1/' flags/showmenu.flag;;
   esac
 fi
